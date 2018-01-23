@@ -10,6 +10,7 @@
       <theme-header :contentData="contentData"></theme-header>
       <theme-content :contentData="contentData"></theme-content>
       <theme-footer :contentData="contentData"></theme-footer>
+      <revert-header></revert-header>
     </div>
     <div class="main-right">
       <individual-msg gerenxinxi="作者" :individualMsg="individualMsg"></individual-msg>
@@ -22,13 +23,15 @@ import themeContent from './themeContent'
 import themeHeader from './themeHeader'
 import themeFooter from './themeFooter'
 import individualMsg from './individualMsg'
+import revertHeader from './revertHeader'
 export default {
   name: 'theme-details',
   components: {
     themeFooter,
     themeContent,
     themeHeader,
-    individualMsg
+    individualMsg,
+    revertHeader
   },
   data () {
     return {

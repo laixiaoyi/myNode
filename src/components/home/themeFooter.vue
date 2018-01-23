@@ -7,7 +7,7 @@
 <template>
   <ul class="themeFooter">
     <p class="themeClass">
-      <a>{{ contentData.reply_count }} 回复</a>
+      <span>{{ contentData.reply_count }} 回复</span>
     </p>
     <li v-for="(item, index) in contentData.replies" :key="index">
       <a :id="item.id"></a>
@@ -31,10 +31,14 @@ export default {
 
 <style lang="scss">
   .themeFooter{
+    margin-top: 10px;
     >li{
       background: #fff;
       border-top: 1px solid #f0f0f0;
       padding: 10px;
+      >div:nth-child(3){
+        margin-left: 40px;
+      }
       >div{
         >.author{
           display: inline-block;
@@ -85,10 +89,9 @@ export default {
       background: #f6f6f6;
       border-top-left-radius: 2px;
       border-top-right-radius: 2px;
-      >a{
+      >span{
         display: inline-block;
         color: #000;
-        margin: 0 10px;
         padding: 3px;
         font-size: 14px;
       }

@@ -22,6 +22,7 @@ export default {
     background: #fff;
     padding: 10px 20px;
     border-top: 1px solid #e5e5e5;
+    border-radius: 0 0 3px 3px;
     .markdown-text{
       h2{
         margin: 30px 0 15px;
