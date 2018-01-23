@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { Button, Icon, Pagination } from 'element-ui'
+import { Button, Icon, Pagination, Select, Option, Input, Alert } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import './assets/css/commonality.scss'
@@ -16,6 +16,10 @@ Vue.prototype.oUrl = 'https://cnodejs.org/api/v1/'
 Vue.use(Button)
 Vue.use(Icon)
 Vue.use(Pagination)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(Input)
+Vue.use(Alert)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -69,6 +69,16 @@ body, input, p, textarea{
     color: #ccc;
   }
 }
+.oTextarea{
+  margin-bottom: 30px;
+  >.el-textarea__inner{
+    border: none;
+    border-bottom: 1px solid #ccc;
+  }
+}
+.publishMessage>.el-alert{
+  margin-bottom: 10px;
+}
 .themeClass{
   display: flex;
   flex-wrap: wrap;
