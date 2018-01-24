@@ -45,6 +45,15 @@ export default {
       onOff: false
     }
   },
+  created () {
+    if (this.$route.params.id !== '0') {
+      let mData = this.$route.params.oData
+      this.value4 = mData.tab
+      this.textarea2 = mData.title
+      mData.content = mData.content.replace(/<.*?>/ig, '')
+      this.textarea3 = mData.content
+    }
+  },
   methods: {
     oSubmit () {
       if (this.value4 === '') {
@@ -68,12 +77,21 @@ export default {
         return this.prompt
       }
       this.onOff = false
-      this.$http.post(this.oUrl + 'topics', {accesstoken: '659b6889-f6c6-4ee7-808d-8286a62f701a', title: this.textarea2, tab: this.value4, content: this.textarea3}).then((res) => {
-        alert('发帖成功')
-        this.$router.go(-1)
-      }).catch((err) => {
-        console.log(err)
-      })
+      if (this.$route.params.id === '0') {
+        this.$http.post(this.oUrl + 'topics', {accesstoken: '659b6889-f6c6-4ee7-808d-8286a62f701a', title: this.textarea2, tab: this.value4, content: this.textarea3}).then((res) => {
+          alert('发帖成功')
+          this.$router.go(-1)
+        }).catch((err) => {
+          console.log(err)
+        })
+      } else {
+        this.$http.post(this.oUrl + 'topics/update', {accesstoken: '659b6889-f6c6-4ee7-808d-8286a62f701a', topic_id: this.$route.params.oData.id, title: this.textarea2, tab: this.value4, content: this.textarea3}).then((res) => {
+          alert('修改成功')
+          this.$router.go(-1)
+        }).catch((err) => {
+          console.log(err)
+        })
+      }
     }
   }
 }

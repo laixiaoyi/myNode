@@ -9,7 +9,7 @@
       <p class="themeClass">
         <span>添加回复</span>
       </p>
-      <revert-msg></revert-msg>
+      <revert-msg @supData="fupData"></revert-msg>
     </div>
 </template>
 
@@ -19,6 +19,11 @@ export default {
   name: 'revert-header',
   components: {
     revertMsg
+  },
+  methods: {
+    fupData () {
+      this.$emit('fuqinupData')
+    }
   }
 }
 </script>

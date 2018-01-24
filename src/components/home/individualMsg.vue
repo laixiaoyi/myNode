@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="release" v-show="gerenxinxi==='个人信息'">
-        <router-link tag="span" to="/topic/create">发布话题</router-link>
+        <router-link tag="span" :to="{ path:'/topic/create/'+0 }">发布话题</router-link>
       </div>
       <div class="oImage">
         <a target="_blank" href="https://alinode.aliyun.com/?ref=cnode"><img src="https://dn-cnode.qbox.me/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_" alt=""></a>

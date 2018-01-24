@@ -20,7 +20,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/topic/create',
+      path: '/topic/create/:id',
       name: 'publishTheme',
       component: publishTheme
     },

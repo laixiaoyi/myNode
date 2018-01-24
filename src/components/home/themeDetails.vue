@@ -9,8 +9,8 @@
     <div class="details">
       <theme-header :contentData="contentData"></theme-header>
       <theme-content :contentData="contentData"></theme-content>
-      <theme-footer :contentData="contentData"></theme-footer>
-      <revert-header></revert-header>
+      <theme-footer @fuqinupData="upData" :contentData="contentData"></theme-footer>
+      <revert-header @fuqinupData="upData"></revert-header>
     </div>
     <div class="main-right">
       <individual-msg gerenxinxi="作者" :individualMsg="individualMsg"></individual-msg>
@@ -49,6 +49,9 @@ export default {
           this.individualMsg = res.data.data
         })
       })
+    },
+    upData () {
+      this.getData()
     }
   },
   created () {

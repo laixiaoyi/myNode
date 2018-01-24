@@ -7,7 +7,7 @@
 <template>
   <div class="main-a">
     <div class="main-left">
-      <common-header-left describe="发布话题"></common-header-left>
+      <common-header-left></common-header-left>
       <publish-message></publish-message>
     </div>
     <div class="main-right">

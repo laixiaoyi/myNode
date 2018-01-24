@@ -21,6 +21,10 @@
           <span v-else-if="contentData.tab==='job'">来自 招聘</span>
           <span v-else-if="contentData.tab==='dev'">来自 客户端测试</span>
         </div>
+        <p v-if="authorName === 'laixiaoyi'">
+          <router-link tag="i" :to="{ name:'publishTheme', params: {id: contentData.id, oData: contentData}}" class="el-icon-edit-outline"></router-link>
+          <i class="el-icon-delete"></i>
+        </p>
     </div>
 </template>
 
@@ -46,6 +50,17 @@ export default {
     background: #fff;
     padding: 10px;
     border-radius: 3px 3px 0 0;
+    >p{
+      >i{
+        font-size: 20px;
+        margin-top: 10px;
+        color: #838383;
+        cursor: pointer;
+      }
+      >i:hover{
+        color: #000;
+      }
+    }
     >div{
       font-size: 12px;
       color: #838383;

@@ -16,7 +16,12 @@
 <script>
 export default {
   name: 'common-header-left',
-  props: ['describe']
+  data () {
+    return {
+      describe: ''
+    }
+  },
+  created () { this.$route.params.id === '0' ? this.describe = '发布话题' : this.describe = '编辑话题' }
 }
 </script>
 

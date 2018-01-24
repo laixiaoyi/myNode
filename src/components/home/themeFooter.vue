@@ -12,20 +12,43 @@
     <li v-for="(item, index) in contentData.replies" :key="index">
       <a :id="item.id"></a>
       <div>
-        <img :src="item.author.avatar_url" alt="">
+        <img class="tieImage" :src="item.author.avatar_url" alt="">
         <span>{{item.author.loginname}}</span>
         <a :href="'#'+item.id">{{index+1}}楼<span> · </span>{{ item.create_at | oDate }}</a>
         <span class="author" v-if="item.author.loginname===contentData.author.loginname">作者</span>
+        <i title="回复" class="el-icon-message" @click="altRevert(index,item)"></i>
       </div>
       <div v-html="item.content"></div>
+      <revert-msg @supData="fuqinupData" v-if="revertShow === index" :str="oAltStr"></revert-msg>
     </li>
   </ul>
 </template>
 
 <script>
+import revertMsg from '../commonality/revertMsg'
 export default {
   name: 'theme-footer',
-  props: ['contentData']
+  props: ['contentData'],
+  components: {
+    revertMsg
+  },
+  data () {
+    return {
+      revertShow: false,
+      oAltStr: ''
+    }
+  },
+  methods: {
+    altRevert (index, item) {
+      this.revertShow = index
+      this.oAltStr = '@' + item.author.loginname + '  '
+      // console.log(item)
+    },
+    fuqinupData () {
+      this.$emit('fuqinupData')
+      this.revertShow = false
+    }
+  }
 }
 </script>
 
@@ -40,13 +63,21 @@ export default {
         margin-left: 40px;
       }
       >div{
+        >i{
+          float: right;
+          font-size: 20px;
+        }
+        >i:hover{
+          color: #80bd01;
+          cursor: pointer;
+        }
         >.author{
           display: inline-block;
           color: #fff;
           padding: 1px;
           background: #80bd01;
         }
-        >img{
+        >.tieImage{
           width: 30px;
           height: 30px;
           border-radius: 5px;
