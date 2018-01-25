@@ -20,6 +20,7 @@
           <span v-else-if="contentData.tab==='ask'">来自 问答</span>
           <span v-else-if="contentData.tab==='job'">来自 招聘</span>
           <span v-else-if="contentData.tab==='dev'">来自 客户端测试</span>
+          <el-button class="collectBtn" style="float: right;" type="success" size="small" @click="collect">{{collectText}}</el-button>
         </div>
         <p v-if="authorName === 'laixiaoyi'">
           <router-link tag="i" :to="{ name:'publishTheme', params: {id: contentData.id, oData: contentData}}" class="el-icon-edit-outline"></router-link>
@@ -35,12 +36,32 @@ export default {
   data () {
     return {
       // 解决contentData.author.loginname作者名渲染报错问题
-      authorName: ''
+      authorName: '',
+      collectText: ''
     }
   },
-  // 解决contentData.author.loginname作者名渲染报错问题
   beforeUpdate () {
+    // 解决contentData.author.loginname作者名渲染报错问题
     this.authorName = this.contentData.author.loginname
+    this.contentData.is_collect ? this.collectText = '取消收藏' : this.collectText = '收藏'
+  },
+  methods: {
+    getData (url) {
+      return this.$http.post(this.oUrl + 'topic_collect/' + url, {accesstoken: '659b6889-f6c6-4ee7-808d-8286a62f701a', topic_id: this.contentData.id})
+    },
+    collect () {
+      if (this.contentData.is_collect) {
+        this.getData('de_collect').then((res) => {
+          this.collectText = '取消收藏'
+          this.$set(this.contentData, 'is_collect', false)
+        })
+      } else {
+        this.getData('collect').then((res) => {
+          this.collectText = '收藏'
+          this.$set(this.contentData, 'is_collect', true)
+        })
+      }
+    }
   }
 }
 </script>

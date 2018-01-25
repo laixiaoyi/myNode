@@ -43,8 +43,9 @@ export default {
     getData () {
       let id = this.$route.params.id
       // console.log(id)
-      this.$http.get(this.oUrl + 'topic/' + id).then((res) => {
+      this.$http.get(this.oUrl + 'topic/' + id, {params: {accesstoken: '659b6889-f6c6-4ee7-808d-8286a62f701a'}}).then((res) => {
         this.contentData = res.data.data
+        // console.log(this.contentData)
         this.$http.get(this.oUrl + 'user/' + this.contentData.author.loginname).then((res) => {
           this.individualMsg = res.data.data
         })
