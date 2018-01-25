@@ -17,6 +17,9 @@
         <a :href="'#'+item.id">{{index+1}}楼<span> · </span>{{ item.create_at | oDate }}</a>
         <span class="author" v-if="item.author.loginname===contentData.author.loginname">作者</span>
         <i title="回复" class="el-icon-message" @click="altRevert(index,item)"></i>
+        <i v-if="item.author.loginname === 'laixiaoyi'" title="删除" class="el-icon-delete"></i>
+        <i v-if="item.author.loginname === 'laixiaoyi'" title="编辑" class="el-icon-edit"></i>
+        <i title="点赞" :class="{'good': item.ups.length===0,'heise': item.is_uped}" class="el-icon-circle-check-outline" @click="oGood(item, index)">{{ item.ups.length }}</i>
       </div>
       <div v-html="item.content"></div>
       <revert-msg @supData="fuqinupData" v-if="revertShow === index" :str="oAltStr"></revert-msg>
@@ -38,6 +41,9 @@ export default {
       oAltStr: ''
     }
   },
+  created () {
+
+  },
   methods: {
     altRevert (index, item) {
       this.revertShow = index
@@ -47,6 +53,15 @@ export default {
     fuqinupData () {
       this.$emit('fuqinupData')
       this.revertShow = false
+    },
+    oGood (item, index) {
+      if (item.author.loginname === 'laixiaoyi') {
+        alert('不能为自己点赞')
+        return
+      }
+      this.$http.post(this.oUrl + 'reply/' + item.id + '/ups', { accesstoken: '659b6889-f6c6-4ee7-808d-8286a62f701a' }).then((res) => {
+        this.$emit('fuqinupData')
+      })
     }
   }
 }
@@ -55,6 +70,11 @@ export default {
 <style lang="scss">
   .themeFooter{
     margin-top: 10px;
+    >li:hover{
+      >div>.good{
+        display: inline;
+      }
+    }
     >li{
       background: #fff;
       border-top: 1px solid #f0f0f0;
@@ -63,9 +83,19 @@ export default {
         margin-left: 40px;
       }
       >div{
+        >.good{
+          display: none;
+        }
+        >i:last-child{
+          color: #ccc;
+        }
+        >.heise{
+          color: #000 !important;
+        }
         >i{
           float: right;
           font-size: 20px;
+          margin: 2px;
         }
         >i:hover{
           color: #80bd01;
