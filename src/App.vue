@@ -11,7 +11,7 @@
         <!--导航1级路由-->
         <ul class="navigate">
           <router-link to="/" tag="li">首页</router-link>
-          <router-link to="/unreadNews" tag="li">未读消息</router-link>
+          <router-link to="/unreadNews" tag="li"><span v-if="unreadMse!==0">{{unreadMse}}</span>未读消息</router-link>
           <router-link to="/newbie" tag="li">新手入门</router-link>
           <router-link to="/API" tag="li">API</router-link>
           <router-link to="about" tag="li">关于</router-link>
@@ -27,7 +27,18 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      unreadMse: 0
+    }
+  },
+  created () {
+    this.$http.get(this.oUrl + 'message/count?accesstoken=659b6889-f6c6-4ee7-808d-8286a62f701a').then((res) => {
+      console.log(res.data.data)
+      this.unreadMse = res.data.data
+    })
+  }
 }
 </script>
 
@@ -102,6 +113,17 @@ export default {
         padding: 10px 15px;
         cursor: pointer;
         color: #ccc;
+        >span{
+          display: inline-block;
+          text-align: center;
+          background: #80bd01;
+          color: #fff;
+          width: 20px;
+          height: 20px;
+          line-height: 20px;
+          border-radius: 50%;
+          margin-right: 5px;
+        }
       }
       >li:hover{
         color: #fff;
